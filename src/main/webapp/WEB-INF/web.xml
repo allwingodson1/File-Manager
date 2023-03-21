@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<display-name>MyProject (1st attempt)</display-name>
+	
+	<welcome-file-list>
+  		<welcome-file>home.html</welcome-file>
+  		<welcome-file>/testing</welcome-file>
+	</welcome-file-list>
+
+	<filter>
+		<filter-name>authentication</filter-name>
+		<filter-class>filters.Authentication</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>authentication</filter-name>
+		<url-pattern>/myapp/*</url-pattern>
+		<url-pattern>/test</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>signup</filter-name>
+		<filter-class>filters.SignupFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>signup</filter-name>
+		<url-pattern>/signup</url-pattern>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>signupServ</servlet-name>
+		<servlet-class>servlets.SignupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>signupServ</servlet-name>
+		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>home</servlet-name>
+		<servlet-class>servlets.HomePage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>home</servlet-name>
+		<url-pattern>/myapp/home</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DbCon</servlet-name>
+		<servlet-class>servlets.DbConnectionServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DbCon</servlet-name>
+		<url-pattern>/dbCon</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>signinserv</servlet-name>
+		<servlet-class>servlets.SigninServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>signinserv</servlet-name>
+		<url-pattern>/signinserv</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StoreFiles</servlet-name>
+		<servlet-class>servlets.StoreFile</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StoreFiles</servlet-name>
+		<url-pattern>/myapp/addAFile</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>test</servlet-name>
+		<servlet-class>servlets.Testing</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>test</servlet-name>
+		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>getMain</servlet-name>
+		<servlet-class>servlets.GetCurrFolder</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getMain</servlet-name>
+		<url-pattern>/myapp/getCurrFolder</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>authForFile</filter-name>
+		<filter-class>filters.FileAuthorization</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>authForFile</filter-name>
+		<url-pattern>/test</url-pattern>
+		<url-pattern>/myapp/getFileText</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>authForFolder</filter-name>
+		<filter-class>filters.FolderAuthorization</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>authForFolder</filter-name>
+		<url-pattern>/myapp/getFolderContent</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>createFolder</servlet-name>
+		<servlet-class>servlets.CreateFolder</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>createFolder</servlet-name>
+		<url-pattern>/myapp/createFolder</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>getFoldercontent</servlet-name>
+		<servlet-class>servlets.GetFolder</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getFoldercontent</servlet-name>
+		<url-pattern>/myapp/getFolderContent</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>setCurrFolder</servlet-name>
+		<servlet-class>servlets.SetCurrFolder</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>setCurrFolder</servlet-name>
+		<url-pattern>/myapp/setCurrFolder</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>getFileText</servlet-name>
+		<servlet-class>servlets.GetFileText</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getFileText</servlet-name>
+		<url-pattern>/myapp/getFileText</url-pattern>
+	</servlet-mapping>
+		
+</web-app>

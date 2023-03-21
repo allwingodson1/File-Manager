@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/2c697b3318.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+        *{
+            font-family: 'Poppins', sans-serif;
+        }
+        html,body{
+			width :100vw;
+			height: 100vh;
+			margin: 0px;
+			padding: 0px;
+			border: 0px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+            overflow: hidden;
+		}
+        #home{
+            width: inherit;
+            height: inherit;
+        }
+        #nav_bar{
+            float: left;
+            width: 20%;
+            height: 94%;
+            background-color: rgb(46, 51, 67);
+        }
+        #nav_bar ul{
+            padding: 5%;
+            width: 90%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+        }
+        #header{
+            width: inherit;
+            height: 6%;
+            background-color: #272d42;
+        }
+        .list_container{
+            cursor: pointer;
+            margin: 3% 5%;
+        }
+        #nav_bar ul li{
+            margin-bottom: 2%;
+            border-radius: 10px;
+            width: 100%;
+        }
+        ul{
+            list-style-type: none;
+            margin-inline: 0px;
+            padding-inline: 0px;
+            margin-block: 0px;
+        }
+        #nav_bar ul li:hover,#nav_bar ul #active{
+            background-color: #5b6176;
+        }
+        #nav_bar ul li div{
+            font-size: 20px;
+            color: #F9FAFA;
+        }
+        #workspace{
+            width: 80%;
+            height: 94%;
+            float: right;
+        }
+        #workspace_header{
+            display: flex;
+            align-items: center;
+            padding-left: 3%;
+            height: 6%;
+        }
+        #workspace_tools{
+            width: 95%;
+            padding: 0px 2.5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 5%;
+        }
+        .headTop{
+            display: inline-block;
+            border-bottom: 1px solid rgb(230, 230, 230);
+            width: 100%;
+        }
+        .none{
+            display: none;
+        }
+        #main{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            background-color:   rgba(200,200,200,.5);
+        }
+        #workspace_tools_right{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 25%;
+            height: 100%;
+        }
+        #arranging_tools{
+            width: 35%;
+            height: 50%;
+            float: right;
+        }
+        #create_button:hover{
+            background-color: #0A6636;
+        }
+        #create_button{
+            cursor: pointer;
+            width: 35%;
+            height: 75%;
+            font-size: 20px;
+            background-color: #0c8044;
+            border: none;
+            color: white;
+            border-radius: 8px;
+            transition: background-color .3s ease-in-out;
+        }
+        .or_gate{
+            width: 2px;
+            height: 70%;
+            background-color: rgba(189,189,189,.5);
+        }
+        #filter_button:focus+div,#sort_button:focus+div,#create_button:focus+div+div+div,.create_choice_dropdown:active{
+            display: flex;
+        }
+        #three{
+            left: 0px;
+        }
+        .hover_and_back_rem{
+            background-color: transparent;
+            border: none;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+        }
+        .hover_and_back_rem:hover{
+            background-color: rgba(180, 180, 180, .3);
+        }
+        #two{
+            left: -30px;
+        }
+        .create_choice_dropdown{
+            position: absolute;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            width: 12vw;
+            border: 1px solid rgba(189,189,189,.5);
+        }
+        #one{
+            top: 100%;
+            left: -50%;
+        }
+        .create_choice_dropdown button:hover{
+            background-color: #eee;
+        }
+        .hor_line{
+            background-color: rgba(200,200,200,.5);
+            width: 96%;
+            margin-left: 2%;
+            height: .9px;
+        }
+        .create_choice_dropdown button{
+            width: 100%;
+            background-color: #ffffff;
+            border: none;
+            height: 50px;
+        }
+        #real_workspace{
+            width: 100%;
+            height: 88.4%;
+        }
+        #real_workspace_left{
+            float: left;
+            width: 95.5%;
+            height: 100%;
+            border-right: 1px solid rgba(189,189,189,.5);
+        }
+        #info_side_bar,#view_info{
+            float: right;
+            width: 3.5%;
+            height: 100%;
+        }
+        #content_header{
+            padding: 0% 2.5%;
+            width: 95%;
+            height: 7.5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #content_header:hover .checkBox,.my_content:hover .checkBox{
+            border: 1px solid #777;
+        }
+        #content_header_left{
+            display: flex;
+            align-items: center;
+            width: 35%;
+            height: 90%
+        }
+        #content_header_right{
+            display: flex;
+            align-items: center;
+            width: 25%;
+            height: 90%;
+        }
+        .select_check_box{
+            cursor: pointer;
+            width: 20px;
+            accent-color: #0c8044;
+        }
+        #content{
+            width: 100%;
+            height: 92.5%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        #content::-webkit-scrollbar,#text_content::-webkit-scrollbar{
+             width: 5px;
+        }
+        #content::-webkit-scrollbar-track,#text_content::-webkit-scrollbar-track{
+            background-color: #f1f1f1;
+        }
+        #content::-webkit-scrollbar-thumb,#text_content::-webkit-scrollbar-thumb{
+            border-radius: 10px;
+            background-color: #555;
+        }
+        #content:hover:-webkit-scrollbar-thumb,#text_content:hover:-webkit-scrollbar-thumb{
+            width: 20px;
+        }
+        #content::-webkit-scrollbar-thumb:hover,#text_content::-webkit-scrollbar-thumb:hover{
+            background-color: #333;
+        }
+        #content::-webkit-scrollbar-corner,#text_content::-webkit-scrollbar-corner {
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+        .higher{
+            height: 1px;
+        }
+        .bala{
+            width: 100%;
+            height: 10%;
+        }
+        .content_header_text{
+            margin-left:10px;
+            font-size:20px;
+        }
+        .checkBox{
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+            border: 1px solid #ffffff00;
+        }
+        .name_container{
+            margin-left: 5%;
+            width: 83%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            grid-template-rows: repeat(1fr,4);
+        }
+        .dummy{
+            width: 15%;
+            height: 100%;
+        }
+        .folder_container_left{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 60%;
+            height: 100%;
+        }
+        .folder_container_right{
+            display: flex;
+            align-items: center;
+            text-align: left;
+            width: 20%;
+            height: 80%;
+        }
+        .black_font{
+            color: black;
+            font-size: 20px;
+        }
+        .grey_font{
+            color: #666;
+            font-size: 15px;
+        }
+        .my_content:hover{
+            background-color: rgba(200,200,200,.1);
+        }
+        .my_content{
+            width: 95%;
+            margin: 0% 2.5%;
+            display: flex;
+            align-items: center;
+            height: 8%;
+        }
+        #viewer{
+            float: right;
+            width: 95%;
+            height: 94%;
+        }
+        #view_head{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            height: 8%;
+        }
+        #view_head_left,#view_head_right{
+            width: 30%;
+            height: 100%;
+        }
+        #main_view{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 96.4%;
+            height: 92%;
+            background-color: #F5F5F5;
+        }
+        #img_space{
+            max-width: 1200px;
+            max-height: 800px;
+            box-shadow: 0px 0px 25px 2px rgb(0 0 0 / 80%);
+        }
+        #text_content{
+            overflow: auto;
+            width: 100%;
+            height: 100%;
+            padding: 0% 0% 5% 5%;
+        }
+        #workspace_tools_left{
+            width: 60%;
+            display: flex;
+            align-items: center;
+            overflow-x: scroll;
+        }
+        #workspace_tools_left::-webkit-scrollbar{
+            display: none;
+        }
+        #workspace_tools_left *{
+            padding: 0px 7px;
+        }
+        .breadCrumb_hover:hover{
+            text-decoration: underline;
+        }
+        #share_box{
+            width: 30%;
+            height: 40%;
+            background-color: white;
+        }
+        #share_header{
+            font-size: 25px;
+            width: 90%;
+            padding-left: 5%;
+            height: 15%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #share_body{
+            width: 100%;
+            height: 65%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #share_footer{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 20%;
+        }
+        #share_search{
+            margin-top: 5%;
+            width: 80%;
+            height: 20%;
+        }
+        #share_search:focus+div,#user_list:hover{
+            display: flex;
+        }
+        #user_list{
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(180, 180, 180, .3);
+            width: 82.3%;
+            height: 60%;
+            overflow-y: scroll;
+        }
+        #user_list::-webkit-scrollbar{
+            display: none;
+        }
+        #user_list>div{
+            width: 100%;
+            height: 30%;
+            font-size: 25px;
+        }
+        #user_list>div:hover{
+            background-color: rgba(180, 180, 180, .6);
+        }
+        #user_list>div>span{
+            margin: 15px;
+        }
+        #user_pool{
+            border: 1px solid black;
+            width: 70%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            overflow-y: scroll;
+        }
+        #user_pool::-webkit-scrollbar{
+            display: none;
+        }
+        .small_elem{
+            background-color: rgba(180, 180, 180, .7);
+            margin-left: 10px;
+        }
+        #share_button:hover{
+            background-color: #0A6636;
+        }
+        #share_button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 60%;
+            background-color: #0c8044;
+        }
+        #header{
+            display: flex;
+            align-items: center;
+            padding-left: 3%;
+        }
+        #white_text{
+            color: white;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+     <div id="home">
+        <div id="header">
+            <span id = "white_text">File Manager</span>
+        </div>
+        <div id="nav_bar">
+            <ul style="padding-left: 5%;">
+                <li onclick = testing(this)>
+                    <div class="list_container">
+                        <i class="fa-regular fa-clock"></i>
+                        <span>Recent Files</span>
+                    </div>
+                </li>
+                <li onclick = "testing(this)">
+                    <div class="list_container">
+                        <i class="fa-solid fa-star"></i>
+                        <span>Favourites</span>
+                    </div>
+                </li>
+                <li onclick = "testing(this)">
+                    <div class="list_container">
+                        <i class="fa-solid fa-share"></i>
+                        <span>Shared with me</span>
+                    </div>
+                </li>
+                <li id = "active" onclick = "testing(this)">
+                    <div class="list_container">
+                        <i class="fa-solid fa-folder"></i>
+                        <span>My Folders</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="workspace">
+            <div id = "workspace_header" class = "headTop"></div>
+            <div id = "workspace_tools" class = "headTop">
+                <div id="workspace_tools_left"></div>
+                <div id="workspace_tools_right">
+                    <button id="create_button">&plus; New</button>
+                    <div class = 'or_gate'></div>
+                    <div id="arranging_tools">
+                        <button id = "sort_button" class="hover_and_back_rem" title="Sort">
+                            <i class="fa-solid fa-sort"></i>
+                        </button>
+                        <div id = "two" class="none create_choice_dropdown" class="">
+                            <button onclick="sort(this)">Name</button>
+                            <div class="hor_line"></div>
+                            <button onclick="sort(this)">Created Date</button>
+                            <div class="hor_line"></div>
+                            <button onclick="sort(this)">Last Modified</button>
+                            <div class="hor_line"></div>
+                        </div>
+                        <button id = "filter_button" title="Filter" class ="hover_and_back_rem">
+                            <i class="fa-solid fa-filter"></i>
+                        </button>
+                        <div id = "three" class="none create_choice_dropdown" class="">
+                            <button onclick="filter(this)">Folders</button>
+                            <div class="hor_line"></div>
+                            <button onclick="filter(this)">Files</button>
+                            <div class="hor_line"></div>
+                            <button onclick="filter(this)">Both</button>
+                            <div class="hor_line"></div>
+                        </div>
+                    </div>
+                    <div id = "one" class = "none create_choice_dropdown">
+                        <button onclick="newFolderPopUp()">New Folder</button>
+                        <div class="hor_line higher"></div>
+                        <input type="file" id="empty_folder_selector" oninput = "getFolder(this)" webkitdirectory class = "none">
+                        <button onclick="document.getElementById('empty_file_selector').click()">Upload Files</button>
+                        <input oninput="getFiles(this)" type="file" multiple id="empty_file_selector" class = "none">
+                    </div>
+                </div>
+            </div>
+            <div id="real_workspace">
+                <div id="real_workspace_left">
+                    <div id="content_header">
+                        <div id="content_header_left">
+                            <div class="checkBox"></div>
+                            <span class = "content_header_text">Name</span>
+                        </div>
+                        <div id="content_header_right">
+                            <span class = "content_header_text">Last Modified</span>
+                        </div>
+                    </div>
+                    <div class="hor_line"></div>
+                    <div id="content"></div>
+                </div>
+                <div id="info_side_bar"></div>
+            </div>
+        </div>
+        <div id = "viewer" class = "none">
+            <div id="view_head">
+				<div onclick = "closeViewer()" style="font-size: 30px;margin-right: 4%;">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>              
+            </div>
+            <div id="view_info"></div>
+            <div id="main_view">
+                <img id="img_space" src = "" class="none">
+                <div id = "text_content" class = "none"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var icons = {
+            "My Folders" : '<i class="fa-solid fa-folder"></i>',
+            "Shared with me" : '<i class="fa-solid fa-share"></i>',
+            Favourites : '<i class="fa-solid fa-star"></i>',
+            'Recent Files' : '<i class="fa-regular fa-clock"></i>'
+        }
+        var sharingUserList = [];
+        var addedInBoxList = [];
+        var currMainDir = "My Folders"
+        document.getElementById('workspace_header').innerHTML = `${icons[currMainDir]}<span class = 'main_text'>&nbsp${currMainDir}</span>`;
+        document.getElementById('workspace_tools_left').innerHTML = `<div onclick ="document.getElementById('workspace_tools_left').innerHTML = this.outerHTML;openFolder(0,true)">${icons[currMainDir]}</div>`;
+        var currDirDetails;
+        var currFileDetails;
+        var currBreadCrumbCnt = 1;
+        document.getElementById('home').onclick = ()=>{
+            var opElem = document.getElementById('options');
+            if(!(opElem?.classList.contains('none'))){
+                opElem?.classList.add('none');
+            }
+        }
+        function append(name,id){
+            document.getElementById('workspace_tools_left').innerHTML += `<div data-id = ${++currBreadCrumbCnt}><i class="fa-solid fa-chevron-right"></i><span class = "grey_font breadCrumb_hover" onclick = "clearcrumb(this,${id})">${name}</span></div>`
+        }
+        function clearcrumb(elem,id){
+            let val = (+elem.parentNode.dataset.id);
+            let elements = document.getElementById('workspace_tools_left').children;
+            currBreadCrumbCnt = val;
+            console.log(elem.parentNode.dataset.id);
+            for(i=elements.length-1;i>=val;i--){
+                console.log(elements[i].remove());
+            }
+            openFolder(id,true);
+        }
+        openFolder(0,false);
+        function getFolder(elem){
+            for(i=0;i<elem.files.length;i++){
+                var file = elem.files[i];
+                console.log(file,'\n',file.isDirectory);
+            }
+        }
+        function openFolder(id,flag){
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','myapp/setCurrFolder?id='+id);
+            xhr.send();
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    getData();
+                }
+            }
+        }
+        function newFolderPopUp(){
+            var name = window.prompt('enter the folder name');
+            if(name){
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST','myapp/createFolder');
+                xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    loadDataFolder(JSON.parse(xhr.responseText));
+                }
+            }
+            xhr.send("name="+name);
+            }
+        }
+        function getFiles(elem){
+            for(let i=0;i<elem.files.length;i++){
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST','myapp/addAFile');
+                let formdata = new FormData();
+                formdata.append('file',elem.files[i]);
+                xhr.onreadystatechange = ()=>{
+                    if(xhr.readyState == 4){
+                        loadDataFile(JSON.parse(xhr.responseText));
+                    }
+                }
+                xhr.upload.onprogress = ()=>console.log("hi");
+                xhr.onload = ()=>console.log("hi2");
+                xhr.send(formdata);
+            }
+        }
+        function sort(elem){
+            let xhr = new XMLHttpRequest();
+            console.log(elem.innerText)
+            xhr.open('GET','myapp/Sort?by='+elem.innerText);
+            xhr.send();
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    document.getElementById('content').innerHTML = ``;
+                    var res = JSON.parse(xhr.responseText);
+                    currDirDetails = res;
+                    res.folders.forEach(element=>{
+                        loadDataFolder(element);
+                    })
+                    res.files.forEach(element => {
+                        loadDataFile(element);
+                    });
+                }
+            }
+        }
+        function filter(elem){
+            if(elem.innerText == 'Folders'){
+                document.getElementById('content').innerHTML = ``;
+                    var res = currDirDetails;
+                    res.folders.forEach(element=>{
+                        loadDataFolder(element);
+                    })
+            }
+            else if(elem.innerText == 'Files'){
+                document.getElementById('content').innerHTML = ``;
+                    var res = currDirDetails;
+                    res.files.forEach(element=>{
+                        loadDataFile(element);
+                    })
+            }
+            else{
+                    document.getElementById('content').innerHTML =  ``;
+                    var res = currDirDetails;
+                    res.folders.forEach(element=>{
+                        loadDataFolder(element);
+                    })
+                    res.files.forEach(element=>{
+                        loadDataFile(element);
+                    }) 
+            }
+        }
+        function getData(){
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET','myapp/getCurrFolder');
+            xhr.send();
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    document.getElementById('content').innerHTML = ``
+                    var res = JSON.parse(xhr.responseText);
+                    currDirDetails = res;
+                    res.folders.forEach(element=>{
+                        loadDataFolder(element);
+                    })
+                    res.files.forEach(element => {
+                        loadDataFile(element);
+                    });
+                }
+            }
+        }
+        function loadDate(date){
+            var format = "YYYY-MM-DD HH:mm:ss";
+            var dateTime = moment(date,format);
+            const now = new Date();
+            const diffSeconds = Math.floor((now - dateTime) / 1000);
+            const diffMinutes = Math.floor(diffSeconds / 60);
+            const diffHours = Math.floor(diffMinutes / 60);
+            const diffDays = Math.floor(diffHours / 24);
+
+            let relativeTime;
+
+            if (diffSeconds < 60) {
+              relativeTime = "just now";
+            } else if (diffMinutes < 60) {
+              relativeTime = `${diffMinutes} minute${diffMinutes === 1 ? "" : "s"} ago`;
+            } else if (diffHours < 24) {
+              relativeTime = `${diffHours} hour${diffHours === 1 ? "" : "s"} ago`;
+            } else if (diffDays < 30) {
+              relativeTime = `${diffDays} day${diffDays === 1 ? "" : "s"} ago`;
+            } else {
+              const options = { year: 'numeric', month: 'long', day: 'numeric' };
+              relativeTime = new Intl.DateTimeFormat('en-US', options).format(dateTime);
+            }
+            return relativeTime;
+        }
+        function loadDataFolder(data){
+            var main = document.createElement('div');
+            var black_text = document.createElement('span');
+            black_text.className = 'black_font';
+            black_text.innerText = data.name;
+            main.oncontextmenu = (event)=>{
+                event.preventDefault();
+                let opElem = document.getElementById('options');
+                opElem?.remove();
+                opElem = document.createElement('div');
+                opElem.id = 'options';
+                opElem.className = 'create_choice_dropdown';
+                var but1 = document.createElement('button');
+                but1.innerText = 'open';
+                but1.onclick = ()=>{openFolder(data.id,true);append(data.name,data.id);}
+                opElem.append(but1);
+                if(currMainDir == 'My Folders'){
+                    var but2 = document.createElement('button');
+                    but2.innerText = 'share';
+                    but2.onclick = ()=>share(data);
+                    opElem.append(but2)
+                    var but3 = document.createElement('button');
+                    but3.innerText = 'delete';
+                    but3.onclick = ()=>deleteThing(data,main);
+                    opElem.append(but3);
+                    var but4 = document.createElement('button');
+                    but4.innerText = 'rename'
+                    but4.onclick = ()=>rename(data,black_text);
+                    opElem.append(but4);
+                    var but5 = document.createElement('button');
+                    but5.innerText = data.isFavourite?'Remove from favourites':'Add to favourites';
+                    but5.onclick = ()=>addFavourite(data,but5);
+                    opElem.append(but5);
+                }
+                document.getElementById('content').append(opElem);
+                opElem.style.top = event.clientY+1+"px";
+                opElem.style.left = event.clientX+1+"px";
+            }
+            main.ondblclick = ()=>{openFolder(data.id,true);append(data.name,data.id)};
+            main.className = 'my_content';
+            var left = document.createElement('div');
+            left.className = 'folder_container_left'
+            var right = document.createElement('div');
+            right.className = 'folder_container_right';
+            var dummy = document.createElement('div');
+            dummy.className = 'dummy';
+            var rightText = document.createElement('span');
+            rightText.innerText = loadDate(data.dateOfModification)+" by "+data.lastModifiedBy;
+            right.appendChild(rightText);
+            var checkBox = document.createElement('div');
+            checkBox.className = 'checkBox';
+            var img = new Image();
+            img.src = 'assets/Folder.png';
+            img.alt = 'Folder'
+            var name_container = document.createElement('div');
+            name_container.className = 'name_container';
+            var grey_text = document.createElement('span');
+            grey_text.className = 'grey_font';
+            grey_text.innerText = 'uploaded by '+data.createdBy;
+            name_container.appendChild(black_text);
+            name_container.appendChild(grey_text);
+            left.appendChild(checkBox);
+            left.appendChild(img);
+            left.appendChild(name_container);
+            main.appendChild(left);
+            main.appendChild(dummy);
+            main.appendChild(right);
+            var hor_line = document.createElement('div');
+            hor_line.className = 'hor_line';
+            document.getElementById('content').appendChild(main);
+            document.getElementById('content').appendChild(hor_line);
+        }
+        function addFavourite(data,elem){
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST','myapp/setFavourite');
+            xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+            xhr.send('id='+data.id+'&value='+!data.isFavourite);
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    if(xhr.responseText == 'sucessfully changed'){
+                        data.isFavourite = !data.isFavourite;
+                        elem.innerText=data.isFavourite?'Remove from favourites':'Add to favourtites';
+                    }
+                }
+            }
+        }
+        function rename(data,elem){
+            var a = prompt('Enter the name');
+            if(a){
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST','myapp/rename');
+                xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                xhr.send('id='+data.id+'&value='+a);
+                xhr.onreadystatechange = ()=>{
+                    if(xhr.readyState == 4){
+                        console.log(xhr.responseText);
+                        if(xhr.responseText == 'sucessfully renamed'){
+                            elem.innerText = a;
+                            data.name = a;
+                        }
+                    }
+                }
+            }
+        }
+        function deleteThing(data,elem){
+            var a = confirm('are you sure you want to delete');
+            if(a){
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST','myapp/delete');
+                xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                xhr.send('id='+data.id);
+                xhr.onreadystatechange = ()=>{
+                    if(xhr.readyState == 4){
+                        alert(xhr.responseText);
+                        if(xhr.responseText == 'sucessfully deleted'){
+                            elem.remove();
+                        }
+                    }
+                }
+            }
+        }
+        function share(data){
+            createShare(data);
+        }
+        function createShare(data){
+            var main = document.createElement('div');
+            main.id = 'main';
+            document.body.append(main);
+            var shareBox = document.createElement('div');
+            shareBox.id = "share_box";
+            main.append(shareBox);
+            var header = document.createElement('div');
+            header.id = "share_header";
+            var body = document.createElement('div');
+            body.id = "share_body";
+            shareBox.append(header);
+            var line = document.createElement('div');
+            line.className = 'hor_line';
+            shareBox.append(line);
+            shareBox.append(body);
+            var temp = document.createElement('span');
+            temp.innerText = "share\t"+data.name;
+            header.append(temp)
+            var close = document.createElement('div');
+            close.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>'
+            close.onclick = ()=>main.remove();
+            header.append(close);
+            let shareFooter =  document.createElement('div');
+            shareFooter.id = 'share_footer';
+            shareBox.append(line.cloneNode(true));
+            shareBox.append(shareFooter);
+            var search = document.createElement('input');
+            search.type = 'text';
+            search.autocomplete = "off";
+            search.id = 'share_search';
+            body.append(search);
+            var userBox = document.createElement('div');
+            search.onfocus = ()=>
+            search.oninput = ()=>(search.value)?hitSearch(search.value):userBox.innerHTML = '';
+            userBox.id = 'user_list';
+            body.append(userBox);
+            var poolBox = document.createElement('div');
+            poolBox.id = 'user_pool';
+            shareFooter.append(poolBox);
+            var shareLoc = document.createElement('div');
+            shareFooter.append(shareLoc);
+            var shareButton = document.createElement('div');
+            shareButton.id = 'share_button';
+            var spanEl = document.createElement('span');
+            spanEl.innerText = 'Share'
+            shareButton.append(spanEl)
+            shareLoc.append(shareButton);
+            shareButton.onclick = ()=>{realShare(data)};
+        }
+        function realShare(data){
+            if(addedInBoxList.length!=0){
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST','myapp/share');
+                xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+                xhr.send(`id=${data.id}&users=${JSON.stringify(addedInBoxList)}`);
+                xhr.onreadystatechange = ()=>{
+                    if(xhr.readyState == 4){
+                        document.getElementById('main').remove();
+                        console.log(xhr.responseText);
+                    }
+                }
+            }
+        }
+        function hitSearch(name){
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','myapp/user?name='+name);
+            xhr.send();
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    sharingUserList = JSON.parse(xhr.responseText);
+                    console.log(sharingUserList);
+                    appendInSearchBox(sharingUserList,name);
+                }
+            }
+        }
+        function appendInSearchBox(list,name){
+            var a = list;
+            var element = document.getElementById('user_list');
+            element.innerHTML = '';
+            if(a.size == 0){
+                element.innerHTML =   `No user found for name '${name}'`
+            }
+            for(i of a){
+                if(!(addedInBoxList.includes(i))){
+                    let elem = document.createElement('div');
+                    let span = document.createElement('span');
+                    let line = document.createElement('div');
+                    line.className = 'hor_line';
+                    span.innerText = i;
+                    element.append(elem);
+                    elem.append(line);
+                    elem.onclick = ()=>{line.remove();addInBox(span);elem.remove();};
+                    elem.append(span);
+                }
+            }
+        }
+        function addInBox(elem){
+            var username = elem.innerText;
+            addedInBoxList.push(username);
+            var mainElem = document.getElementById('user_pool');
+            var smallElem = document.createElement('div');
+            smallElem.className = 'small_elem';
+            var name = document.createElement('span');
+            name.innerText = username;
+            mainElem.append(smallElem);
+            smallElem.append(name);
+            smallElem.innerHTML += '<i onclick = removeFromBox(this) class="fa-regular fa-circle-xmark"></i>'
+        }
+        function removeFromBox(elem){
+            addedInBoxList.splice(addedInBoxList.indexOf(elem.parentNode.children[0].innerText),1);
+            elem.parentNode.remove();
+        }
+        var orgData;
+        function fileOpen(data){
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','myapp/openedFile?id='+data.id);
+            xhr.send();
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    console.log(xhr.responseText);
+                }
+            }
+            orgData = data;
+            data.ContentType.startsWith('text')?textView(data):imgView(data);
+        }
+        function loadDataFile(data){
+            var main = document.createElement('div');
+            main.ondblclick = ()=>{
+            	fileOpen(data);
+            }
+            main.oncontextmenu = (event)=>{
+                event.preventDefault();
+                let opElem = document.getElementById('options');
+                opElem?.remove();
+                opElem = document.createElement('div');
+                opElem.id = 'options';
+                opElem.className = 'create_choice_dropdown';
+                var but1 = document.createElement('button');
+                but1.innerText = 'open';
+                but1.onclick = ()=>{
+                    fileOpen(data);
+                }
+                opElem.append(but1);
+                if(currMainDir == 'My Folders'){
+                    var but2 = document.createElement('button');
+                    but2.innerText = 'share';
+                    but2.onclick = ()=>share(data);
+                    opElem.append(but2)
+                    var but3 = document.createElement('button');
+                    but3.innerText = 'delete';
+                    but3.onclick = ()=>deleteThing(data,main);
+                    opElem.append(but3);
+                    var but4 = document.createElement('button');
+                    but4.innerText = 'rename'
+                    but4.onclick = ()=>rename(data,black_text);
+                    opElem.append(but4);
+                    var but5 = document.createElement('button');
+                    but5.innerText = data.isFavourite?'Remove from favourites':'Add to favourites';
+                    but5.onclick = ()=>addFavourite(data,but5);
+                    opElem.append(but5);
+                }
+                document.getElementById('content').append(opElem);
+                opElem.style.top = event.clientY+1+"px";
+                opElem.style.left = event.clientX+1+"px";
+            }
+            main.className = 'my_content';
+            var left = document.createElement('div');
+            left.className = 'folder_container_left'
+            var right = document.createElement('div');
+            right.className = 'folder_container_right';
+            var dummy = document.createElement('div');
+            dummy.className = 'dummy';
+            var rightText = document.createElement('span');
+            rightText.innerText = loadDate(data.dateOfModification)+" by "+data.lastModifiedBy;
+            right.appendChild(rightText);
+            var checkBox = document.createElement('div');
+            checkBox.className = 'checkBox';
+            var img = new Image();
+            loadImg(img,"test?id="+data.id,data.ContentType);
+            var name_container = document.createElement('div');
+            name_container.className = 'name_container';
+            var black_text = document.createElement('span');
+            black_text.className = 'black_font';
+            black_text.innerText = data.name;
+            var grey_text = document.createElement('span');
+            grey_text.className = 'grey_font';
+            grey_text.innerText = 'uploaded by '+data.createdBy;
+            name_container.appendChild(black_text);
+            name_container.appendChild(grey_text);
+            left.appendChild(checkBox);
+            left.appendChild(img);
+            left.appendChild(name_container);
+            main.appendChild(left);
+            main.appendChild(dummy);
+            main.appendChild(right);
+            var hor_line = document.createElement('div');
+            hor_line.className = 'hor_line';
+            document.getElementById('content').appendChild(main);
+            document.getElementById('content').appendChild(hor_line);
+        }
+        async function loadImg(img,src,type){
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET',src);
+            xhr.responseType = 'blob';
+            xhr.send();
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    var myImg = new Image();
+                    myImg.src = URL.createObjectURL(xhr.response);
+                    myImg.onload = ()=>{
+                        var val = Math.max(myImg.height,myImg.width)/50;
+                        var canvas = document.createElement('canvas');
+                        canvas.width = ~~(myImg.width/val);
+                        canvas.height =~~(myImg.height/val);
+                        var ctx = canvas.getContext('2d');
+                        ctx.drawImage(myImg,0,0,~~(myImg.width/val),~~(myImg.height/val));
+                        img.src = canvas.toDataURL(type);
+                    }
+                    myImg.onerror = ()=>{
+                        img.src = 'assets/File.png';
+                        img.alt = 'File';
+                    }
+                }
+            }
+        }
+        function down(){
+        	var a = document.createElement('a');
+        	a.href = 'test?id='+orgData.id;
+        	a.download = orgData.name;
+            document.body.append(a);
+        	a.click();
+            a.remove();
+        }
+        function imgView(data){
+            document.getElementById('workspace').classList.add('none');
+            document.getElementById('viewer').classList.remove('none');
+            document.getElementById('nav_bar').style.display = 'none';
+            document.getElementById('img_space').classList.remove('none');
+            document.getElementById('img_space').src = 'test?id='+data.id;
+        }
+        function closeViewer(){
+        	document.getElementById('img_space').className = 'none';
+        	document.getElementById('text_content').className = 'none';
+            document.getElementById('viewer').classList.add('none');
+            document.getElementById('workspace').classList.remove('none');
+            document.getElementById('nav_bar').style = '';
+        }
+        function textView(data){
+        	var xhr = new XMLHttpRequest();
+            xhr.open('GET',"test?id="+data.id);
+            xhr.send();
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState == 4){
+                    document.getElementById('workspace').classList.add('none');
+                    document.getElementById('viewer').classList.remove('none');
+                    document.getElementById('nav_bar').style.width = '5%';
+                    document.getElementById('nav_bar').style.display = 'none';
+                    document.getElementById('text_content').classList.remove('none');
+                    document.getElementById('text_content').innerText = xhr.responseText;
+                }
+            }
+        }
+        function testing(elem){
+        	if(elem.id != 'active'){
+        		document.getElementById('active').id = '';
+        		elem.id = 'active';
+                if(document.getElementById('active').children[0].children[1].innerText == 'Shared with me'){
+                    document.getElementById('create_button').style.display = 'none';
+                    currMainDir = 'Shared with me';
+                    document.getElementById('workspace_tools_left').innerHTML = `<div onclick ="document.getElementById('workspace_tools_left').innerHTML = this.outerHTML;openFolder(-1,true)">${icons[currMainDir]}</div>`
+                    openFolder(-1,true);
+                }
+                else if(document.getElementById('active').children[0].children[1].innerText == 'My Folders'){
+                    currMainDir = 'My Folders';
+                    document.getElementById('create_button').style.display = 'block';
+                    document.getElementById('workspace_tools_left').innerHTML = `<div onclick ="document.getElementById('workspace_tools_left').innerHTML = this.outerHTML;openFolder(0,true)">${icons[currMainDir]}</div>`
+                    openFolder(0,true);
+                }
+                else if(document.getElementById('active').children[0].children[1].innerText == 'Favourites'){
+                    currMainDir = 'Favourites';
+                    document.getElementById('create_button').style.display = 'none';
+                    document.getElementById('workspace_tools_left').innerHTML = `<div onclick ="document.getElementById('workspace_tools_left').innerHTML = this.outerHTML;openFolder(-2,true)">${icons[currMainDir]}</div>`
+                    openFolder(-2,true);
+                }
+                else{
+                    currMainDir = 'Recent Files';
+                    document.getElementById('create_button').style.display = 'none';
+                    document.getElementById('workspace_tools_left').innerHTML = `<div onclick ="document.getElementById('workspace_tools_left').innerHTML = this.outerHTML;openFolder(-2,true)">${icons[currMainDir]}</div>`
+                    openFolder(-3,true);
+                }
+                document.getElementById('workspace_header').innerHTML = `${icons[currMainDir]}<span class = 'main_text'>&nbsp${currMainDir}</span>`;
+        	}
+        }
+   </script>
+</body>
+</html>
